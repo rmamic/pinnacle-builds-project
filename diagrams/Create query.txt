@@ -1,0 +1,109 @@
+CREATE TABLE component (
+	id				SERIAL PRIMARY KEY,
+	model			CHAR(64) NOT NULL,
+	quantity		INTEGER NOT NULL,
+	unit_price		REAL NOT NULL
+);
+
+CREATE TABLE CPU (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	socket			CHAR(64) NOT NULL,
+	cores			INTEGER NOT NULL,
+	threads			INTEGER NOT NULL,
+	clock_speed		REAL NOT NULL,
+	boost_clock_speed REAL NOT NULL,
+	stock_included	BOOL NOT NULL,
+	TDP				INTEGER NOT NULL
+);
+
+CREATE TABLE CPU_fan (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	length			INTEGER NOT NULL
+);
+
+CREATE TABLE RAM (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	ddr				CHAR(4)  NOT NULL,
+	memory_size		INTEGER NOT NULL,
+	frequency		INTEGER NOT NULL
+);
+
+CREATE TABLE motherboard (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	socket			CHAR(64) NOT NULL,
+	form			CHAR(64) NOT NULL,
+	chipset			CHAR(64) NOT NULL,
+	safe_CPU_TDP	INTEGER NOT NULL
+);
+
+CREATE TABLE PSU (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	power			INTEGER NOT NULL,
+	isFullyModular	BOOL NOT NULL,
+	fan				INTEGER NOT NULL,
+	certificate		CHAR(64) NOT NULL
+);
+
+CREATE TABLE SSD (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	format			CHAR(64) NOT NULL,
+	interface		CHAR(64) NOT NULL,
+	seq_write_speed		INTEGER NOT NULL,
+	seq_read_speed		INTEGER NOT NULL,
+	capacity		INTEGER NOT NULL
+);
+
+CREATE TABLE HDD (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	format			CHAR(64) NOT NULL,
+	rotation_speed	INTEGER NOT NULL,
+	capacity		INTEGER NOT NULL
+);
+
+CREATE TABLE GPU (
+	id				SERIAL REFERENCES component(id) PRIMARY KEY,
+	boost_clock		INTEGER NOT NULL,
+	memory_capacity			INTEGER NOT NULL,
+	memory_type		CHAR(64) NOT NULL,
+	length			INTEGER NOT NULL,
+	TDP				INTEGER NOT NULL
+);
+
+CREATE TABLE pc_case (
+	id				SERIAL REFERENCES component(id) NOT NULL,
+	format				CHAR(64) NOT NULL,
+	PRIMARY KEY			(id, format),
+	height			REAL NOT NULL,
+	width			REAL NOT NULL,
+	length			REAL NOT NULL,
+	weight			REAL NOT NULL,
+	gpu_length		REAL NOT NULL,
+	cooler_height	REAL NOT NULL
+);
+
+CREATE TABLE pc_configuration (
+	id				SERIAL PRIMARY KEY,
+	total_price		REAL NOT NULL,
+	isMadeByUser	BOOL NOT NULL,
+	name			CHAR(64)
+);
+
+CREATE TABLE configuration_component (
+	component_id 		SERIAL NOT NULL REFERENCES component(id),
+	configuration_id	SERIAL NOT NULL REFERENCES pc_configuration(id),
+	PRIMARY KEY			(component_id, configuration_id)
+);
+
+CREATE TABLE registered_user (
+	id				INTEGER PRIMARY KEY,
+	username		CHAR(64) NOT NULL,
+	password_hash	CHAR(256) NOT NULL,
+	date_created	TIMESTAMP NOT NULL
+);
+
+CREATE TABLE cart (
+	user_id			INTEGER NOT NULL REFERENCES registered_user(id),
+	pc_configuration	INTEGER NOT NULL REFERENCES pc_configuration(id),
+	
+	PRIMARY KEY (user_id, pc_configuration)
+);

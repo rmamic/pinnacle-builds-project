@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@700&display=swap');
+
+*{
+	font-family: "Karla";
+	font-weight: 700;
+	margin: 0px;
+	padding: 0px;
+}
+
+li,a{
+	font-size: 20px;
+	color: white;
+	text-decoration: none;
+}
+
+header{ 
+	display: flex;
+	justify-content: center;
+	z-index: 2;
+	position: fixed;
+	height: 60px;
+	top: 0px;
+	width: 100%;
+	background-color: #1D1D1D;
+}
+
+#logo{
+	display: block;
+	height: 40px;
+	width: 40px;
+	margin-top: 10px;
+	
+}
+
+#drop{
+	position: absolute;
+	top: 60px;
+	text-align: left;
+	left: 0;
+	background-color: #1D1D1D;
+	width: 100%;
+	transform: scale(1,0);
+	transform-origin: top;
+	transition: transform 400ms ease-in-out;
+}
+
+#drop ul{
+	margin: 0px;
+	padding: 0px;
+	list-style: none
+}
+
+#drop li{
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+
+#drop li a{
+	filter: drop-shadow(0 0 0.15rem orange);
+	opacity: 0;
+	transition: opacity 150ms ease-in-out;
+	transition: filter 300ms ease-in-out;
+}
+
+#drop-toggle:checked ~ #drop{
+	transform: scale(1,1);
+}
+
+#drop-toggle:checked ~ #drop li a{
+	opacity: 1;
+	transition: opacity 250ms ease-in-out 250ms;
+}
+
+#drop-toggle{
+	display: none;
+}
+
+#drop-label{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	color: white;
+	margin-left: 15px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+#drop-label span,
+#drop-label span::before,
+#drop-label span::after{
+	display: block;
+	background:white;
+	height: 4px;
+	width: 32px;
+	border-radius: 3px;
+	position: relative;
+}
+
+#drop-label span::before,
+#drop-label span::after{
+	content: '';
+	position: absolute;
+}
+
+#drop-label span::before{
+	bottom: 8px;
+}
+
+#drop-label span::after{
+	top: 8px;
+}
+
+@media screen and (min-width: 1025px){
+	header{
+		justify-content: space-between;
+	}
+
+	#logo{
+		margin-left: 40px;
+		margin-right: 10px;
+	}
+
+	#drop{
+		position: static;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transform: scale(1,1);
+		margin-inline-end: 40px;
+	}
+
+	#drop li{
+		margin-bottom: 0px;
+		margin-left: 0px;
+	}
+
+	#drop li a{
+		opacity: 1;
+	}
+
+	#drop li a:hover {
+		color:rgb(255, 0, 0);
+		filter: drop-shadow(0 0 0.90rem orangered);
+	}
+
+	#drop-label span,
+	#drop-label span::before,
+	#drop-label span::after{
+	display: none;
+	}
+
+	.tabsLeft{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		list-style: none;
+		margin-inline-start: 40px;
+	}
+	
+	.tabsLeft li {
+		margin:0px 16px;
+	}
+	
+	.tabsRight{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		list-style: none;
+		margin-inline-end: 40px;
+	}
+	
+	.tabsRight li{
+		margin:0px 16px;
+	}
+}

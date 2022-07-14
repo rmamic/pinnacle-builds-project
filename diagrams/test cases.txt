@@ -1,0 +1,22 @@
+RS-6
+pregled ponude prebuilt racunala
+cilj testa je provjera uspjesnosti dohvacanja gotovih racunala iz baze podataka
+rezultat - uspjesan prikaz ponude prebuilt racunala
+
+RS-8
+pregled trenutnog stanja kosarice
+za ulogiranog korisnika dohvaca se stanje kosarice, ako je prazna korisniku se kaze da je prazno
+rezultat - uspjesan prikaz proizvoda u kosarici
+
+RS-9
+izbacivanje proizvoda iz kosarice
+cilj testa je provjera uspjesnosti uklanjanja proizvoda iz kosarice, klikom na X salje se zahtjev bazi podataka
+za uklanjanjem, ako je uspjesno korisniku se prikaze da je uspio. ako je kosarica postala prazna nakon uklanjanja,
+poruka se mijenja u kosarica prazna
+rezultat - uspjesno uklanjanje proizvoda iz kosarice
+
+RS-12
+opis komponenti unutar buildera
+cilj testa je provjera uspjesnosti prikazivanja pop-upa klikom na ABOUT gumb na komponenti. Popup formatirano prikazuje detalje o
+izabranoj komponenti.
+rezultat - uspjesan prikaz opisa specificne komponente
